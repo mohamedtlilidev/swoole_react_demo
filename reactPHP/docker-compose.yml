@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  websocket:
+    build: .
+    ports:
+      - "8084:8084"
+      - "8083:80"
+    restart: unless-stopped
+    environment:
+      - PHP_MEMORY_LIMIT=256M
+    volumes:
+      - './:/var/www/html:cached'
+    networks:
+      - chat-network
+
+networks:
+  chat-network:
+    driver: bridge
